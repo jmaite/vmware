@@ -6,9 +6,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
-@Component
 public class Weather {
-    
+
     private long id;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate date;

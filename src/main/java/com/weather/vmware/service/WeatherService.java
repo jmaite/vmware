@@ -9,10 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WeatherService {
-
-    @Autowired
-    private Weather weather;
+@Component
+public class WeatherService implements IWeatherService{
 
     public List<Weather> retrieveAllWeather(){
         List<Weather> allWeather = new ArrayList<Weather>();
