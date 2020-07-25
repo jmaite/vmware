@@ -2,8 +2,6 @@ package com.weather.vmware.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 
 public class Weather {
@@ -13,6 +11,8 @@ public class Weather {
     private LocalDate date;
     private Location loc;
     private float temps[] = new float[24];
+
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
 
     @Autowired
     public Weather(long id, LocalDate date, Location loc, float temps[]) {
