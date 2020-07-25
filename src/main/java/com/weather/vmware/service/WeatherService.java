@@ -19,8 +19,9 @@ public class WeatherService implements IWeatherService{
     private WeatherDAO weatherDAO;
 
     public List<Weather> retrieveAllWeather(String date){
-        if (date != null)
+        if (date != null) {
             return weatherDAO.getAllWeather(formatDate(date));
+        }
 
         return weatherDAO.getAllWeather();
     }

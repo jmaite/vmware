@@ -12,8 +12,9 @@ import java.util.List;
 public class WeatherDAOInMemImpl implements WeatherDAO {
     private List<Weather> allWeatherList = new ArrayList<>();
 
-    @Override
-    public List<Weather> getAllWeather() {
+    public WeatherDAOInMemImpl() {
+
+        //THIS DATA IS HARDCODED AND NEEDS TO BE REMOVED
         LocalDate myDate = LocalDate.parse("2020-01-10");
         Location myLocation = new Location(8.0, 10.0, "Boulder", "Colorado");
         float myTemps[] = {0f, 12.1f, 111.1f, 100.9123f, 12412.8f, 1349.0f, 123.9f, 1341.2f, 109.2f, 19.2f, 12.9f, 1241.20129f,
@@ -30,13 +31,27 @@ public class WeatherDAOInMemImpl implements WeatherDAO {
 
         allWeatherList.add(weather1);
         allWeatherList.add(weather2);
+    }
 
+    @Override
+    public List<Weather> getAllWeather() {
         return allWeatherList;
     }
 
     @Override
     public List<Weather> getAllWeather(LocalDate date) {
-        return null;
+        if (date == null) {
+            return getAllWeather();
+        }
+
+        List<Weather> allWeatherByDateList = new ArrayList<>();
+        for(Weather currWeather : allWeatherList) {
+            if (currWeather.getDate().equals(date)) {
+                allWeatherByDateList.add(currWeather);
+            }
+        }
+
+        return allWeatherByDateList;
     }
 
     @Override
