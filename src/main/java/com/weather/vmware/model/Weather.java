@@ -1,6 +1,9 @@
 package com.weather.vmware.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 public class Weather implements Comparable<Weather> {
@@ -8,16 +11,6 @@ public class Weather implements Comparable<Weather> {
     private LocalDate date;
     private Location loc;
     private float temps[] = new float[24];
-
-    public Weather() {}
-
-    @Autowired
-    public Weather(int id, LocalDate date, Location loc, float temps[]) {
-        this.id = id;
-        this.date = date;
-        this.loc = loc;
-        this.temps = temps;
-    }
 
     public int compareTo(Weather w) {
         return this.id - w.getId();
@@ -52,6 +45,8 @@ public class Weather implements Comparable<Weather> {
     }
 
     public void setTemps(float inTemps[]) {
-        this.temps = inTemps;
+        for (int i = 0; i < inTemps.length; i++) {
+            this.temps[i] = new BigDecimal(inTemps[i]).setScale(1, RoundingMode.UP).floatValue();
+        }
     }
 }
