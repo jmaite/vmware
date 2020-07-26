@@ -10,7 +10,7 @@ public interface WeatherDAO {
 
     List<Weather> getAllWeather(LocalDate date);
 
-    void addWeather(int id);
+    boolean addWeather(Weather weather);
 
     void deleteAll();
 }

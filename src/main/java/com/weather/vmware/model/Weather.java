@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Weather {
 
-    private long id;
+    private int id;
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
     private Location loc;
@@ -15,18 +15,18 @@ public class Weather {
     public static final String DATE_FORMAT = "yyyy-MM-dd";
 
     @Autowired
-    public Weather(long id, LocalDate date, Location loc, float temps[]) {
+    public Weather(int id, LocalDate date, Location loc, float temps[]) {
         this.id = id;
         this.date = date;
         this.loc = loc;
         this.temps = temps;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long inId) {
+    public void setId(int inId) {
         this.id = inId;
     }
 

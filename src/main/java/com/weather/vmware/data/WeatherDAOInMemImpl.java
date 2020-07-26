@@ -50,17 +50,29 @@ public class WeatherDAOInMemImpl implements WeatherDAO {
                 allWeatherByDateList.add(currWeather);
             }
         }
-
         return allWeatherByDateList;
     }
 
     @Override
-    public void addWeather(int id) {
-
+    public boolean addWeather(Weather weather) {
+        if (isIdNew(weather.getId())) {
+            allWeatherList.add(weather);
+            return true;
+        }
+        return false;
     }
 
     @Override
     public void deleteAll() {
+        allWeatherList.clear();
+    }
 
+    private boolean isIdNew(int inId) {
+        for(Weather currWeather : allWeatherList) {
+            if (currWeather.getId() == inId) {
+                return false;
+            }
+        }
+        return true;
     }
 }

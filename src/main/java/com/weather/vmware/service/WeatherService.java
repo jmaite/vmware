@@ -22,17 +22,15 @@ public class WeatherService implements IWeatherService{
         if (date != null) {
             return weatherDAO.getAllWeather(formatDate(date));
         }
-
         return weatherDAO.getAllWeather();
     }
 
-    public Weather addWeather(Weather newWeather) {
-        return null;
-
+    public boolean addWeather(Weather newWeather) {
+        return weatherDAO.addWeather((newWeather));
     }
 
     public void deleteAllWeather() {
-
+        weatherDAO.deleteAll();
     }
 
     private LocalDate formatDate(String dateStr) {
