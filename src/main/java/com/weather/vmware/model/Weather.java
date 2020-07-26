@@ -6,13 +6,19 @@ import java.time.LocalDate;
 
 public class Weather implements Comparable<Weather> {
 
+
     private int id;
+
+
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
+
+
     private Location loc;
+
+
     private float temps[] = new float[24];
 
-    public static final String DATE_FORMAT = "yyyy-MM-dd";
 
     @Autowired
     public Weather(int id, LocalDate date, Location loc, float temps[]) {
@@ -21,6 +27,7 @@ public class Weather implements Comparable<Weather> {
         this.loc = loc;
         this.temps = temps;
     }
+
     public int compareTo(Weather w) {
         return this.id - w.getId();
     }

@@ -3,13 +3,15 @@ package com.weather.vmware.controller;
 import com.weather.vmware.model.Weather;
 import com.weather.vmware.service.IWeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
 import java.util.List;
 
+@Validated
 @RestController
 public class WeatherController {
 
@@ -17,9 +19,15 @@ public class WeatherController {
     private IWeatherService weatherService;
 
     @GetMapping("/weather")
-    @ResponseStatus( HttpStatus.OK )
-    public List<Weather> retrieveAllWeather(@RequestParam(value="date", required=false) String date){
-        return weatherService.retrieveAllWeather(date);
+    @ResponseStatus(HttpStatus.OK)
+    public List<Weather> retrieveAllWeather(
+            @RequestParam(value="date", required=false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
+
+        if (date != null) {
+           return weatherService.retrieveAllWeather(date);
+        }
+        return weatherService.retrieveAllWeather();
     }
 
     @PostMapping(path = "/weather", consumes = "application/json", produces = "application/json")
