@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 
 public class Weather implements Comparable<Weather> {
-
     private int id;
     private LocalDate date;
     private Location loc;

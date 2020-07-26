@@ -1,30 +1,26 @@
 package com.weather.vmware.model;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Location {
-    private final double lat;
-    private final double lon;
-    private final String city;
-    private final String state;
+    private double lat;
+    private double lon;
+    private String city;
+    private String state;
 
     public Location(double lat, double lon, String city, String state) {
-        this.lat = lat;
-        this.lon = lon;
+        this.lat = new BigDecimal(lat).setScale(4, RoundingMode.UP).doubleValue();
+        this.lon = new BigDecimal(lon).setScale(4, RoundingMode.UP).doubleValue();
         this.city = city;
         this.state = state;
     }
 
-    public double getLat() {
-        return lat;
-    }
-
-    public double getLon() {
-        return lon;
-    }
-
+    public double getLat() { return lat; }
+    public double getLon() { return lon; }
     public String getCity() {
         return city;
     }
-
     public String getState() {
         return state;
     }
