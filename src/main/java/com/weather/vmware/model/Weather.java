@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 
-public class Weather {
+public class Weather implements Comparable<Weather> {
 
     private int id;
     @JsonFormat(pattern="yyyy-MM-dd")
@@ -20,6 +20,9 @@ public class Weather {
         this.date = date;
         this.loc = loc;
         this.temps = temps;
+    }
+    public int compareTo(Weather w) {
+        return this.id - w.getId();
     }
 
     public int getId() {

@@ -17,6 +17,7 @@ public class WeatherController {
     private IWeatherService weatherService;
 
     @GetMapping("/weather")
+    @ResponseStatus( HttpStatus.OK )
     public List<Weather> retrieveAllWeather(@RequestParam(value="date", required=false) String date){
         return weatherService.retrieveAllWeather(date);
     }
@@ -26,12 +27,13 @@ public class WeatherController {
         if(weatherService.addWeather(weather)) {
             return new ResponseEntity<> (HttpStatus.CREATED);
         }
-        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @DeleteMapping("/erase")
-    public void deleteAllWeather() {
+    public ResponseEntity<Object> deleteAllWeather() {
         weatherService.deleteAllWeather();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
