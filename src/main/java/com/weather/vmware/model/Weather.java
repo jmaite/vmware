@@ -1,24 +1,16 @@
 package com.weather.vmware.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 
 public class Weather implements Comparable<Weather> {
 
-
     private int id;
-
-
-    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
-
-
     private Location loc;
-
-
     private float temps[] = new float[24];
 
+    public Weather() {}
 
     @Autowired
     public Weather(int id, LocalDate date, Location loc, float temps[]) {
@@ -63,5 +55,4 @@ public class Weather implements Comparable<Weather> {
     public void setTemps(float inTemps[]) {
         this.temps = inTemps;
     }
-
 }

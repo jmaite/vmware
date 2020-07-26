@@ -1,9 +1,7 @@
 package com.weather.vmware.data;
 
-import com.weather.vmware.model.Location;
 import com.weather.vmware.model.Weather;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;

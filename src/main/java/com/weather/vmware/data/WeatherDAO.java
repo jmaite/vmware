@@ -1,7 +1,6 @@
 package com.weather.vmware.data;
 
 import com.weather.vmware.model.Weather;
-
 import java.time.LocalDate;
 import java.util.List;
 
