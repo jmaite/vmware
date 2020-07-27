@@ -1,6 +1,7 @@
 package com.weather.vmware.controller;
 
 import com.weather.vmware.error.ErrorResponse;
+import com.weather.vmware.error.WeatherServiceException;
 import com.weather.vmware.model.Weather;
 import com.weather.vmware.service.IWeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class WeatherController {
 
     @GetMapping("/weather")
     @ResponseStatus(HttpStatus.OK)
-    public List<Weather> retrieveAllWeather(
+    public List<Weather> retrieveAllWeather (
             @RequestParam(value="date", required=false)
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
 
@@ -33,17 +34,15 @@ public class WeatherController {
     }
 
     @PostMapping(path = "/weather", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Object> addWeatherData(@RequestBody Weather weather) throws Exception {
-        if(weatherService.addWeather(weather)) {
-            return new ResponseEntity<> (HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addWeatherData(@RequestBody Weather weather) throws Exception {
+       weatherService.addWeather(weather);
     }
 
     @DeleteMapping("/erase")
-    public ResponseEntity<Object> deleteAllWeather() {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAllWeather() throws Exception {
         weatherService.deleteAllWeather();
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
@@ -51,5 +50,11 @@ public class WeatherController {
         String details = "The " + ex.getName() + " had an invalid value of: " + ex.getValue();
         ErrorResponse error = new ErrorResponse(new Date(),"Validation Failed", details);
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(WeatherServiceException.class)
+    public final ResponseEntity<Object> handleWeatherServiceException(WeatherServiceException ex, WebRequest request) {
+        ErrorResponse error = new ErrorResponse(new Date(), ex.getMessage(), "");
+        return new ResponseEntity<>(error, ex.getHttpStatusCode());
     }
 }
