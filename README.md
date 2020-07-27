@@ -3,7 +3,7 @@
 
 ### Summary
 This project consists of providing a REST API service for weather information using Spring Boot.  It has a minimal number of 
-queries. Currently supporting adding one weather data at a time, and deleting all the information.  It is also able to
+endpoints. It currently supports adding one weather data at a time, and deleting all the information.  It is also able to
 return all the data recorded or data corresponding to a specific date.
 
 This service does not use a database but rather an in-memory datastructure.  It is a 3-tier app split into model, view, and controller.
