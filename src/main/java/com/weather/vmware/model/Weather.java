@@ -7,8 +7,8 @@ import java.time.LocalDate;
 public class Weather implements Comparable<Weather> {
     private int id;
     private LocalDate date;
-    private Location loc;
-    private float temps[] = new float[24];
+    private Location location;
+    private float temperature[] = new float[24];
 
     public int compareTo(Weather w) {
         return this.id - w.getId();
@@ -30,21 +30,21 @@ public class Weather implements Comparable<Weather> {
         this.date = inDate;
     }
 
-    public Location getLoc() {
-        return loc;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLoc(Location inLoc) {
-        this.loc = inLoc;
+    public void setLocation(Location inLoc) {
+        this.location = inLoc;
     }
 
-    public float[] getTemps() {
-        return temps;
+    public float[] getTemperature() {
+        return temperature;
     }
 
-    public void setTemps(float inTemps[]) {
+    public void setTemperature(float inTemps[]) {
         for (int i = 0; i < inTemps.length; i++) {
-            this.temps[i] = new BigDecimal(inTemps[i]).setScale(1, RoundingMode.UP).floatValue();
+            this.temperature[i] = new BigDecimal(inTemps[i]).setScale(1, RoundingMode.UP).floatValue();
         }
     }
 }
