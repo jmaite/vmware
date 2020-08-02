@@ -47,7 +47,6 @@ public class WeatherServiceTest {
         weather.setTemperature(temps);
 
         Exception exception = assertThrows(WeatherServiceException.class, () -> { this.weatherService.addWeather(weather); });
-
         assertTrue(exception.getMessage().contains("The Id has to be a positive integer"));
     }
 
@@ -66,7 +65,6 @@ public class WeatherServiceTest {
 
         given(this.weatherDAO.addWeather(weather)).willReturn(false);
         Exception exception = assertThrows(WeatherServiceException.class, () -> { this.weatherService.addWeather(weather); });
-
         assertTrue(exception.getMessage().contains("Unable to add weather"));
     }
 }

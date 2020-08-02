@@ -2,8 +2,6 @@ package com.weather.vmware.data;
 
 import com.weather.vmware.model.Location;
 import com.weather.vmware.model.Weather;
-import org.apache.tomcat.jni.Local;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -76,7 +74,6 @@ class WeatherDAOInMemImplTest {
     void deleteAllWhenEmpty() {
         List<Weather> allWeather = weatherDao.getAllWeather();
         weatherDao.deleteAll();
-
         assertTrue(allWeather.isEmpty());
     }
 
@@ -103,7 +100,6 @@ class WeatherDAOInMemImplTest {
 
     private Weather makeMyWeather(int id, LocalDate date) {
         Weather weather = new Weather();
-
         weather.setId(id);
         weather.setDate(date);
 
