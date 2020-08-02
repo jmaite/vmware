@@ -14,7 +14,7 @@ public class WeatherDAOInMemImpl implements WeatherDAO {
     @Override
     public List<Weather> getAllWeather() {
         Collections.sort(allWeatherList);
-        return allWeatherList;
+        return new ArrayList(allWeatherList);
     }
 
     @Override
@@ -29,8 +29,8 @@ public class WeatherDAOInMemImpl implements WeatherDAO {
                 allWeatherByDateList.add(currWeather);
             }
         }
-        Collections.sort(allWeatherList);
-        return allWeatherByDateList;
+        Collections.sort(allWeatherByDateList);
+        return new ArrayList(allWeatherByDateList);
     }
 
     @Override

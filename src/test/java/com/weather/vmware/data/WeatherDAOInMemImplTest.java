@@ -92,10 +92,9 @@ class WeatherDAOInMemImplTest {
         weatherDao.addWeather(weather3);
         weatherDao.addWeather(weather4);
 
-        List<Weather> allWeather = weatherDao.getAllWeather();
+        assertFalse(weatherDao.getAllWeather().isEmpty());
         weatherDao.deleteAll();
-
-        assertTrue(allWeather.isEmpty());
+        assertTrue(weatherDao.getAllWeather().isEmpty());
     }
 
     private Weather makeMyWeather(int id, LocalDate date) {

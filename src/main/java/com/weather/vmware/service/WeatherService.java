@@ -4,7 +4,6 @@ import com.weather.vmware.data.WeatherDAO;
 import com.weather.vmware.error.WeatherServiceException;
 import com.weather.vmware.model.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.List;
@@ -24,13 +23,18 @@ public class WeatherService implements IWeatherService{
     }
 
     public boolean addWeather(Weather newWeather) {
-        if (newWeather.getId() <= 0) {
-            throw new WeatherServiceException(("The Id has to be a positive integer"), HttpStatus.BAD_REQUEST);
+        try {
+            if (newWeather.getId() <= 0) {
+                throw new WeatherServiceException(("The Id has to be a positive integer"));
+            }
+            if (!weatherDAO.addWeather(newWeather)) {
+                throw new WeatherServiceException(("Unable to add weather"));
+            }
+            return true;
         }
-        if (!weatherDAO.addWeather(newWeather)) {
-            throw new WeatherServiceException(("Unable to add weather"), HttpStatus.BAD_REQUEST);
+        catch(IllegalArgumentException ex) {
+            throw new WeatherServiceException(ex.getMessage(), ex);
         }
-        return true;
     }
 
     public void deleteAllWeather() {

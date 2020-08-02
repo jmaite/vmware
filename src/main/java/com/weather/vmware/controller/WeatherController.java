@@ -1,5 +1,6 @@
 package com.weather.vmware.controller;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.weather.vmware.error.ErrorResponse;
 import com.weather.vmware.error.WeatherServiceException;
 import com.weather.vmware.model.Weather;
@@ -55,6 +56,12 @@ public class WeatherController {
     @ExceptionHandler(WeatherServiceException.class)
     public final ResponseEntity<Object> handleWeatherServiceException(WeatherServiceException ex, WebRequest request) {
         ErrorResponse error = new ErrorResponse(new Date(), ex.getMessage(), "");
-        return new ResponseEntity<>(error, ex.getHttpStatusCode());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(JsonMappingException.class)
+    public final ResponseEntity<Object> handleJsonMappingException(JsonMappingException ex, WebRequest request) {
+        ErrorResponse error = new ErrorResponse(new Date(), ex.getMessage(), "");
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }

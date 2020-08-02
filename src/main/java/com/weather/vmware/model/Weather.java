@@ -43,8 +43,11 @@ public class Weather implements Comparable<Weather> {
     }
 
     public void setTemperature(float inTemps[]) {
+        if (inTemps.length > 24) {
+            throw new IllegalArgumentException("Temperature array must contain 24 elements");
+        }
         for (int i = 0; i < inTemps.length; i++) {
-            this.temperature[i] = new BigDecimal(inTemps[i]).setScale(1, RoundingMode.UP).floatValue();
+            this.temperature[i] = new BigDecimal(inTemps[i]).setScale(1, RoundingMode.HALF_UP).floatValue();
         }
     }
 }

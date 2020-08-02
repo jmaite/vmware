@@ -10,8 +10,8 @@ public class Location {
     private String state;
 
     public Location(double lat, double lon, String city, String state) {
-        this.lat = new BigDecimal(lat).setScale(4, RoundingMode.UP).doubleValue();
-        this.lon = new BigDecimal(lon).setScale(4, RoundingMode.UP).doubleValue();
+        this.lat = new BigDecimal(lat).setScale(4, RoundingMode.HALF_UP).doubleValue();
+        this.lon = new BigDecimal(lon).setScale(4, RoundingMode.HALF_UP).doubleValue();
         this.city = city;
         this.state = state;
     }
