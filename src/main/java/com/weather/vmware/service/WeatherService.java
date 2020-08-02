@@ -24,11 +24,11 @@ public class WeatherService implements IWeatherService{
     }
 
     public boolean addWeather(Weather newWeather) {
-        if (Integer.valueOf(newWeather.getId()) == null) {
-            throw new WeatherServiceException(("The Id is a required field"), HttpStatus.BAD_REQUEST);
+        if (newWeather.getId() <= 0) {
+            throw new WeatherServiceException(("The Id has to be a positive integer"), HttpStatus.BAD_REQUEST);
         }
         if (!weatherDAO.addWeather(newWeather)) {
-            throw new WeatherServiceException(("The Id already exists"), HttpStatus.BAD_REQUEST);
+            throw new WeatherServiceException(("Unable to add weather"), HttpStatus.BAD_REQUEST);
         }
         return true;
     }
