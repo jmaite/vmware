@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.weather.vmware.model.Location;
 import com.weather.vmware.model.Weather;
 import com.weather.vmware.service.WeatherService;
+import com.weather.vmware.utils.WeatherBuilderUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ public class WeatherControllerTest {
 
     @Test
     public void givenWeather_whenGetWeather_thenReturnJsonArray() throws Exception {
-        Weather weather = makeMyWeather(1, LocalDate.now());
+        Weather weather = WeatherBuilderUtils.makeMyWeather(1, LocalDate.now());
         List<Weather> allWeather = Arrays.asList(weather);
         given(service.retrieveAllWeather()).willReturn(allWeather);
 
@@ -52,8 +53,8 @@ public class WeatherControllerTest {
     public void givenWeather_whenGetWeatherByDate_thenReturnJsonArray() throws Exception {
         LocalDate firstDate = LocalDate.now();
 
-        Weather weather1 = makeMyWeather(3, firstDate);
-        Weather weather2 = makeMyWeather(23, firstDate);
+        Weather weather1 = WeatherBuilderUtils.makeMyWeather(3, firstDate);
+        Weather weather2 = WeatherBuilderUtils.makeMyWeather(23, firstDate);
 
         //testing the date query string returns expected values
         List<Weather> firstDateWeather = new ArrayList<>();
@@ -102,21 +103,5 @@ public class WeatherControllerTest {
         mvc.perform(delete("/erase")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-    }
-
-    private Weather makeMyWeather(int id, LocalDate date) {
-        Weather weather = new Weather();
-        weather.setId(id);
-        weather.setDate(date);
-
-        Location location = new Location(244.2, 2346.2332, "Broomfield", "Colorado");
-        weather.setLocation(location);
-
-        float temps[] = new float[] {12.323f, 14.523f, 134.324f, 2342.1352f, 12.45f, 23.34f,
-                12.323f, 14.523f, 134.324f, 2342.1352f, 12.45f, 23.34f,
-                12.323f, 14.523f, 134.324f, 2342.1352f, 12.45f, 23.34f};
-        weather.setTemperature(temps);
-
-        return weather;
     }
 }
