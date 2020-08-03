@@ -13,5 +13,4 @@ class LocationTest {
         assertEquals(213.1230d, loc.getLat());
         assertEquals(234.1235d, loc.getLon());
     }
-
 }

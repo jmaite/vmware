@@ -1,10 +1,8 @@
 package com.weather.vmware.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.weather.vmware.model.Location;
 import com.weather.vmware.model.Weather;
 import com.weather.vmware.service.WeatherService;
-import com.weather.vmware.utils.WeatherBuilderUtils;
+import com.weather.vmware.factory.WeatherFactory;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -13,9 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;;
-import javax.swing.text.html.HTMLDocument;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,6 +22,7 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 @WebMvcTest
 public class WeatherControllerTest {
@@ -38,7 +34,7 @@ public class WeatherControllerTest {
 
     @Test
     public void givenWeather_whenGetWeather_thenReturnJsonArray() throws Exception {
-        Weather weather = WeatherBuilderUtils.makeMyWeather(1, LocalDate.now());
+        Weather weather = WeatherFactory.makeMyWeather(1, LocalDate.now());
         List<Weather> allWeather = Arrays.asList(weather);
         given(service.retrieveAllWeather()).willReturn(allWeather);
 
@@ -53,8 +49,8 @@ public class WeatherControllerTest {
     public void givenWeather_whenGetWeatherByDate_thenReturnJsonArray() throws Exception {
         LocalDate firstDate = LocalDate.now();
 
-        Weather weather1 = WeatherBuilderUtils.makeMyWeather(3, firstDate);
-        Weather weather2 = WeatherBuilderUtils.makeMyWeather(23, firstDate);
+        Weather weather1 = WeatherFactory.makeMyWeather(3, firstDate);
+        Weather weather2 = WeatherFactory.makeMyWeather(23, firstDate);
 
         //testing the date query string returns expected values
         List<Weather> firstDateWeather = new ArrayList<>();

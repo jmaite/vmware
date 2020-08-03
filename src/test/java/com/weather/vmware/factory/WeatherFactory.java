@@ -1,11 +1,11 @@
-package com.weather.vmware.utils;
+package com.weather.vmware.factory;
 
 import com.weather.vmware.model.Location;
 import com.weather.vmware.model.Weather;
 
 import java.time.LocalDate;
 
-public class WeatherBuilderUtils {
+public class WeatherFactory {
 
     public static Weather makeMyWeather(int id, LocalDate date) {
         Weather weather = new Weather();

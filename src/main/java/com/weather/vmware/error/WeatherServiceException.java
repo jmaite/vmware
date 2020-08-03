@@ -6,7 +6,6 @@ public class WeatherServiceException extends RuntimeException {
         super(message);
     }
 
-
     public WeatherServiceException(String message, Throwable cause) {
         super(message, cause);
     }

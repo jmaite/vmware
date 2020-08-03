@@ -1,8 +1,7 @@
 package com.weather.vmware.data;
 
-import com.weather.vmware.model.Location;
 import com.weather.vmware.model.Weather;
-import com.weather.vmware.utils.WeatherBuilderUtils;
+import com.weather.vmware.factory.WeatherFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -25,10 +24,10 @@ class WeatherDAOInMemImplTest {
 
     @Test
     void getAllWeatherSortedById() {
-        weatherDao.addWeather(WeatherBuilderUtils.makeMyWeather(345, LocalDate.now()));
-        weatherDao.addWeather(WeatherBuilderUtils.makeMyWeather(54, LocalDate.now()));
-        weatherDao.addWeather(WeatherBuilderUtils.makeMyWeather(6, LocalDate.now()));
-        weatherDao.addWeather(WeatherBuilderUtils.makeMyWeather(3, LocalDate.now()));
+        weatherDao.addWeather(WeatherFactory.makeMyWeather(345, LocalDate.now()));
+        weatherDao.addWeather(WeatherFactory.makeMyWeather(54, LocalDate.now()));
+        weatherDao.addWeather(WeatherFactory.makeMyWeather(6, LocalDate.now()));
+        weatherDao.addWeather(WeatherFactory.makeMyWeather(3, LocalDate.now()));
 
         List<Weather> allWeather = weatherDao.getAllWeather();
 
@@ -42,10 +41,10 @@ class WeatherDAOInMemImplTest {
         LocalDate firstDate = LocalDate.now();
         LocalDate secondDate = firstDate.minusDays(2);
 
-        Weather weather1 = WeatherBuilderUtils.makeMyWeather(345, firstDate);
-        Weather weather2 = WeatherBuilderUtils.makeMyWeather(45, firstDate);
-        Weather weather3 = WeatherBuilderUtils.makeMyWeather(3, secondDate);
-        Weather weather4 = WeatherBuilderUtils.makeMyWeather(35, secondDate);
+        Weather weather1 = WeatherFactory.makeMyWeather(345, firstDate);
+        Weather weather2 = WeatherFactory.makeMyWeather(45, firstDate);
+        Weather weather3 = WeatherFactory.makeMyWeather(3, secondDate);
+        Weather weather4 = WeatherFactory.makeMyWeather(35, secondDate);
 
         weatherDao.addWeather(weather1);
         weatherDao.addWeather(weather2);
@@ -64,8 +63,8 @@ class WeatherDAOInMemImplTest {
         LocalDate firstDate = LocalDate.now();
         LocalDate secondDate = firstDate.minusDays(2);
 
-        Weather weather1 =  WeatherBuilderUtils.makeMyWeather(345, firstDate);
-        Weather weather2 =  WeatherBuilderUtils.makeMyWeather(345, secondDate);
+        Weather weather1 =  WeatherFactory.makeMyWeather(345, firstDate);
+        Weather weather2 =  WeatherFactory.makeMyWeather(345, secondDate);
 
         assertTrue(weatherDao.addWeather(weather1));
         assertFalse(weatherDao.addWeather(weather2));
@@ -83,10 +82,10 @@ class WeatherDAOInMemImplTest {
         LocalDate firstDate = LocalDate.now();
         LocalDate secondDate = firstDate.minusDays(2);
 
-        Weather weather1 = WeatherBuilderUtils.makeMyWeather(345, firstDate);
-        Weather weather2 = WeatherBuilderUtils.makeMyWeather(45, firstDate);
-        Weather weather3 = WeatherBuilderUtils.makeMyWeather(3, secondDate);
-        Weather weather4 = WeatherBuilderUtils.makeMyWeather(35, secondDate);
+        Weather weather1 = WeatherFactory.makeMyWeather(345, firstDate);
+        Weather weather2 = WeatherFactory.makeMyWeather(45, firstDate);
+        Weather weather3 = WeatherFactory.makeMyWeather(3, secondDate);
+        Weather weather4 = WeatherFactory.makeMyWeather(35, secondDate);
 
         weatherDao.addWeather(weather1);
         weatherDao.addWeather(weather2);
