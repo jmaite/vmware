@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Component
-public class WeatherDAOInMemImpl implements WeatherDAO {
+public class WeatherDAOInMemImpl implements IWeatherDAO {
     private List<Weather> allWeatherList = new ArrayList<>();
 
     @Override

@@ -1,6 +1,6 @@
 package com.weather.vmware.service;
 
-import com.weather.vmware.data.WeatherDAO;
+import com.weather.vmware.data.IWeatherDAO;
 import com.weather.vmware.error.WeatherServiceException;
 import com.weather.vmware.model.Location;
 import com.weather.vmware.model.Weather;
@@ -32,7 +32,7 @@ public class WeatherServiceTest {
     private WeatherService weatherService;
 
     @MockBean
-    private WeatherDAO weatherDAO;
+    private IWeatherDAO weatherDAO;
 
     @Test
     public void addWeatherWithoutIdGetException() {

@@ -1,6 +1,6 @@
 package com.weather.vmware.service;
 
-import com.weather.vmware.data.WeatherDAO;
+import com.weather.vmware.data.IWeatherDAO;
 import com.weather.vmware.error.WeatherServiceException;
 import com.weather.vmware.model.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import java.util.List;
 public class WeatherService implements IWeatherService{
 
     @Autowired
-    private WeatherDAO weatherDAO;
+    private IWeatherDAO weatherDAO;
 
     public List<Weather> retrieveAllWeather() {
         return weatherDAO.getAllWeather();
